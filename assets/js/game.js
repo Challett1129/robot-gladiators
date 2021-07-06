@@ -36,15 +36,17 @@ var playerInfo = {
       this.money -=7;
       } else {
         window.alert("You don't have enough money!")
+        shop();
       }
     },
   upgradeAttack: function() {
-    window.alert("Upgrading player's attack by 6 for 7 dollars.")
     if(this.money >=7) {
+      window.alert("Upgrading player's attack by 6 for 7 dollars.")
       this.attack += 6;
       this.money -=7;
     } else {
       window.alert("You don't have enough money!")
+      shop();
     }
   },
 
@@ -87,7 +89,6 @@ var fightOrSkip = function() {
     if(confirmSkip) {
       window.alert(playerInfo.name + " has decided to skip this fiight. Goodbye!");
       playerInfo.money = playerInfo.money - 10; 
-      shop();
       return true;
     }
   }
@@ -147,7 +148,6 @@ var startGame = function() {
       window.alert("Welcome to Robot Gladiators! Round " + (i + 1 ));
  
       var pickedEnemyObj = enemyInfo[i];
-      debugger;
 
 
       pickedEnemyObj.health = randomNumber(40, 60);
@@ -194,22 +194,20 @@ else {
 }
 
 var shop = function() {
+  debugger;
   console.log("entered the shop");
   var shopOptionPrompt = window.prompt(
-    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? Please enter 1 for REFILL, 2 for UPGRADE, or 3 to LEAVE."
   );
-
+  shopOptionPrompt = parseInt(shopOptionPrompt);
   switch (shopOptionPrompt) {
-    case "REFILL": // new case
-    case "refill":
+    case 1: //refills health
       playerInfo.refillHealth();
       break;
-    case "UPGRADE": // new case
-    case "upgrade":
+    case 2: //upgrades attack 
       playerInfo.upgradeAttack();
       break;
-    case "LEAVE": // new case
-    case "leave":
+    case 3: //leaves store 
       window.alert("Leaving the store.");
       break;
     default:
